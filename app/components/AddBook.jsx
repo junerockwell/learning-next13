@@ -5,6 +5,8 @@ import { useState } from "react";
 export default function AddBook({ refreshBooks }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [newBookTitle, setNewBookTitle] = useState("");
+  const [newBookLink, setNewBookLink] = useState("");
+  const [newBookImage, setNewBookImage] = useState("");
 
   async function handleSubmitNewBook(e) {
     e.preventDefault();
@@ -17,8 +19,8 @@ export default function AddBook({ refreshBooks }) {
       },
       body: JSON.stringify({
         title: newBookTitle,
-        link: "https://www.amazon.com/dp/B0979MGJ5J",
-        img: "https://via.placeholder.com/600/92c952",
+        link: newBookLink,
+        img: newBookImage,
       }),
     });
 
@@ -43,7 +45,7 @@ export default function AddBook({ refreshBooks }) {
       >
         <form
           method="dialog"
-          className="modal-box"
+          className="modal-box flex flex-col"
           onSubmit={handleSubmitNewBook}
         >
           <button
@@ -53,13 +55,27 @@ export default function AddBook({ refreshBooks }) {
           >
             x
           </button>
-          <h3 className="font-bold text-lg">Add New Book</h3>
+          <h2 className="font-bold text-lg mb-4">Add New Book</h2>
           <input
             type="text"
             value={newBookTitle}
             placeholder="Enter New Book Title"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full mb-2"
             onChange={(e) => setNewBookTitle(e.target.value)}
+          />
+          <input
+            type="url"
+            value={newBookLink}
+            placeholder="Enter New Book Link"
+            className="input input-bordered w-full mb-2"
+            onChange={(e) => setNewBookLink(e.target.value)}
+          />
+          <input
+            type="url"
+            value={newBookImage}
+            placeholder="Enter New Book Image Link"
+            className="input input-bordered w-full mb-2"
+            onChange={(e) => setNewBookImage(e.target.value)}
           />
           <button type="submit" className="btn btn-primary">
             Add Book
