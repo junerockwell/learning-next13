@@ -1,5 +1,9 @@
 async function fetchRepos(user) {
-  const res = await fetch(`https://api.github.com/users/${user}/repos`);
+  const res = await fetch(`https://api.github.com/users/${user}/repos`, {
+    next: {
+      revalidate: 60, // 60 seconds cache
+    },
+  });
   const json = await res.json();
   return json;
 }
@@ -26,14 +30,6 @@ export default async function Repos({ user }) {
                 <td>{repo.description}</td>
               </tr>
             ))}
-
-            {/* row 3 */}
-            {/* <tr>
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Red</td>
-            </tr> */}
           </tbody>
         </table>
       </div>
