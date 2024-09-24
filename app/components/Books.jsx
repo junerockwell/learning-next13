@@ -18,11 +18,15 @@ export default function Books() {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  async function fetchBooks() {
     getBooks().then((books) => {
       setBooks(books);
       setLoading(false);
     });
-  }, []);
+  }
 
   if (loading) return <LoadingPage />;
 
@@ -53,7 +57,7 @@ export default function Books() {
           Search
         </button>
       </form>
-      <AddBook />
+      <AddBook refreshBooks={fetchBooks} />
       <div className="grid grid-cols-3 gap-4">
         {books.map((book) => (
           <div key={book.id}>

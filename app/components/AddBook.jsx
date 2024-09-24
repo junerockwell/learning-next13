@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function AddBook() {
+export default function AddBook({ refreshBooks }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [newBookTitle, setNewBookTitle] = useState("");
 
@@ -10,7 +10,7 @@ export default function AddBook() {
     e.preventDefault();
     console.log("handleSubmitNewBook: ", newBookTitle);
 
-    const res = await fetch(`/api/book/`, {
+    const res = await fetch(`/api/books/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,6 +25,9 @@ export default function AddBook() {
     if (res.ok) {
       setNewBookTitle("");
       setModalOpen(false);
+      const x = await res.json();
+      console.log(x);
+      refreshBooks();
     }
   }
 
