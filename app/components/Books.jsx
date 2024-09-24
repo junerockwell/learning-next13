@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import LoadingPage from "../loading";
+import AddBook from "./AddBook";
 
 async function getBooks() {
   const res = await fetch("http://localhost:3000/api/books");
@@ -52,6 +53,7 @@ export default function Books() {
           Search
         </button>
       </form>
+      <AddBook />
       <div className="grid grid-cols-3 gap-4">
         {books.map((book) => (
           <div key={book.id}>
