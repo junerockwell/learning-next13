@@ -42,6 +42,15 @@ export default function Books() {
     setLoading(false);
   }
 
+  async function deleteBook(id) {
+    const res = await fetch(`/api/books/${id}`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      fetchBooks();
+    }
+  }
+
   return (
     <div>
       <h1 className="text-4xl font-bold font-poppins mb-8">Books</h1>
@@ -72,7 +81,12 @@ export default function Books() {
                   <Link href={book.link} className="btn btn-primary btn-xs">
                     See in Amazon
                   </Link>
-                  <button className="btn btn-error btn-xs">Delete</button>
+                  <button
+                    className="btn btn-error btn-xs"
+                    onClick={() => deleteBook(book.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
