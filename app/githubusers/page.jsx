@@ -20,11 +20,6 @@ export default async function GitHubUsersPage() {
           {/* head */}
           <thead>
             <tr>
-              {/* <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th> */}
               <th>Name</th>
               <th>URL</th>
               <th>Repos</th>
@@ -52,17 +47,23 @@ export default async function GitHubUsersPage() {
                     View on GitHub
                   </Link>
                 </td>
-                <th>Go to Repos</th>
+                <th>
+                  <Link
+                    href={`/githubusers/${user.login}`}
+                    className="btn btn-link"
+                  >
+                    Go To Repos
+                  </Link>
+                </th>
               </tr>
             ))}
           </tbody>
           {/* foot */}
           <tfoot>
             <tr>
-              <th></th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>URL</th>
+              <th>Repos</th>
               <th></th>
             </tr>
           </tfoot>
